@@ -8,5 +8,5 @@ const app = new cdk.App();
 new ServiceEventBridgeStack(app, `ServiceEventBridgeStack-${stage}`, {
 	stage,
 	serviceName: "service-eventbridge",
-	eventBusName: "cdk-insights-event-bus",
+	eventBusName: "service-eventbridge-event-bus",
 });

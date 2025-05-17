@@ -12,11 +12,15 @@ export class ServiceEventBridgeStack extends Stack {
 
 		const { stage, serviceName, eventBusName } = props;
 
-		const eventBusDlq = new Queue(this, `event-bus-dlq-${stage}`, {
-			queueName: `${eventBusName}-dlq-${stage}`,
-			retentionPeriod: Duration.days(14),
-			removalPolicy: RemovalPolicy.DESTROY,
-		});
+		const eventBusDlq = new Queue(
+			this,
+			`${serviceName}-event-bus-dlq-${stage}`,
+			{
+				queueName: `${eventBusName}-dlq-${stage}`,
+				retentionPeriod: Duration.days(14),
+				removalPolicy: RemovalPolicy.DESTROY,
+			},
+		);
 
 		this.eventBus = new EventBus(this, `${serviceName}-event-bus-${stage}`, {
 			eventBusName: `${eventBusName}-${stage}`,
